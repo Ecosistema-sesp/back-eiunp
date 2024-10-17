@@ -1,11 +1,58 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User, Group
 from sistema import models as sis_models
 
-
 # DATOS CONTACTO
+
+# MODELOS DE TABLAS ESTÁTICAS DE USUARIO
+
+class TipoVinculacion(models.Model):
+    id_tvinculacion = models.AutoField(primary_key=True)
+    nombre_tvinculacion = models.CharField(max_length=30, null=True, blank=True)
+
+    class Meta:
+        db_table = 'eco_bas_tipovinculacion'
+        verbose_name_plural = 'Tipo de vinculación a la UNP'
+
+    def __str__(self):
+        return str(self.id_busuario)
+
+class Dependencia(models.Model):
+    id_dependencia = models.SmallAutoField(primary_key=True)
+    nombre_dependencia = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'eco_bas_dependencia'
+        verbose_name_plural = 'Dependencia'
+
+    def __str__(self):
+        return str(self.nombre_dependencia)
+    
+class Grupo(models.Model):
+    id_grupo = models.SmallAutoField(primary_key=True)
+    nombre_grupo = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'eco_bas_grupo'
+        verbose_name_plural = 'Grupo'
+
+    def __str__(self):
+        return str(self.nombre_grupo)
+
+class Rol(models.Model):
+    id_rol = models.SmallAutoField(primary_key=True)
+    nombre_rol = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'eco_bas_rol'
+        verbose_name_plural = 'Rol'
+
+    def __str__(self):
+        return str(self.nombre_rol)
+
+
+# MODELOS DE TABLAS DINÁMICAS DE USUARIOS
 
 class TelefonoCelularContactoUsuario(models.Model):
     id_ctelefono = models.SmallAutoField(primary_key=True)
@@ -45,8 +92,7 @@ class DatosContactoUsuario(models.Model):
     def __str__(self):
         return str(self.id_contacto)
 
-
-# DATOS UBICACION
+# datos de ubicación
 
 class DatosUbicacionUsuario(models.Model):
     id_ubicacion = models.AutoField(primary_key=True)
@@ -104,9 +150,7 @@ class direccionUrbana(DatosUbicacionUsuario):
         db_table = 'eco_usr_direccionurbana'
         verbose_name_plural = 'Dirección urbana'
 
-
-# DATOS BASICOS
-
+# datos básicos
 class IdentificacionUsuario(models.Model):
     id_iusuario = models.AutoField(primary_key=True)
     numero_identificacion = models.CharField(max_length=20, null=False, blank=True)
@@ -150,20 +194,8 @@ class DatosBasicosUsuario(models.Model):
     def __str__(self):
         return str(self.id_busuario)
     
+# datos complementarios
 
-# DATOS COMPLEMENTARIOS
-
-class TipoVinculacion(models.Model):
-    id_tvinculacion = models.AutoField(primary_key=True)
-    nombre_tvinculacion = models.CharField(max_length=30, null=True, blank=True)
-
-    class Meta:
-        db_table = 'eco_bas_tipovinculacion'
-        verbose_name_plural = 'Tipo de vinculación a la UNP'
-
-    def __str__(self):
-        return str(self.id_busuario)
- 
 class DatosComplementariosUsuario(models.Model):
     id_cusuario = models.AutoField(primary_key=True)
     estado_civil = models.ForeignKey(sis_models.EstadoCivil, to_field='id_ecivil', on_delete=models.CASCADE, null=True)
@@ -205,49 +237,14 @@ class ResolucionFuncionario(models.Model):
     def __str__(self):
         return str(self.id_resolucion)
     
+# datos para definir el perfil de usuario
 
-# DATOS PARA DEFINIR EL PERFIL DE USUARIO
-
-class Dependencia(models.Model):
-    id_dependencia = models.SmallAutoField(primary_key=True)
-    nombre_dependencia = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = 'eco_bas_dependencia'
-        verbose_name_plural = 'Dependencia'
-
-    def __str__(self):
-        return str(self.nombre_dependencia)
-    
-class Grupo(models.Model):
-    id_grupo = models.SmallAutoField(primary_key=True)
-    nombre_grupo = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = 'eco_bas_grupo'
-        verbose_name_plural = 'Grupo'
-
-    def __str__(self):
-        return str(self.nombre_grupo)
-
-class Rol(models.Model):
-    id_rol = models.SmallAutoField(primary_key=True)
-    nombre_rol = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = 'eco_bas_rol'
-        verbose_name_plural = 'Rol'
-
-    def __str__(self):
-        return str(self.nombre_rol)
-    
 class PerfilUsuario(models.Model):
     id_pusuario = models.AutoField(primary_key=True)
     dependencia = models.ForeignKey(Dependencia, to_field='id_dependencia', on_delete=models.CASCADE)
     grupo = models.ForeignKey(Grupo, to_field='id_grupo', on_delete=models.CASCADE)
     rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE)
     basicos_usuario = models.ForeignKey(DatosBasicosUsuario, to_field='id_busuario', on_delete=models.CASCADE, null=True, blank=True)
-
 
     class Meta:
         db_table = 'eco_usr_perfilusuario'

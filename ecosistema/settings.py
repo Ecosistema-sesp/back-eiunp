@@ -18,8 +18,8 @@ INSTALLED_APPS = [
     'reuniones',
     'usuario',
     'gsc',
-    'svc',
     'sistema',
+    'registro',
     'rest_framework'
 
 ]
@@ -66,7 +66,7 @@ def decrypt_message(encrypted_message):
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': decrypt_message(config('DATABASE_NAME')),
         'USER': decrypt_message(config('DATABASE_USER')),
         'PASSWORD': decrypt_message(config('DATABASE_PASSWORD')),
@@ -101,3 +101,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal308.dll' # Gauss '/opt/homebrew/opt/gdal/lib/libgdal.dylib' MacOS
+GEOS_LIBRARY_PATH = r'C:\OSGeo4W\bin\geos_c.dll' # '/opt/homebrew/opt/geos/lib/libgeos_c.dylib' MacOS

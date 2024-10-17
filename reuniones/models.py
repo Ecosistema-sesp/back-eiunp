@@ -6,6 +6,35 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+# MODELOS DE TABLAS ESTÁTICAS DE REUNIONES
+
+class SedeUnp(models.Model):
+    id_sede = models.AutoField(primary_key=True)
+    nombre_sede = models.CharField(max_length=100, blank=True, null=True)
+    departamento = models.ForeignKey(sis_models.Departamento, to_field='id_departamento', on_delete=models.CASCADE, blank=True, null=True)
+    Municipio = models.ForeignKey(sis_models.Municipio, to_field='id_municipio', on_delete=models.CASCADE, blank=True, null=True)
+    
+    class Meta:
+        db_table = 'eco_bas_sede'
+        verbose_name_plural = 'Sedes de la UNP'
+
+    def __str__(self):
+        return str(self.id_sede)
+
+class TipoEstadoCompromiso(models.Model):
+    id_tecompromiso = models.AutoField(primary_key=True)
+    nombre_tecompromiso = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        db_table = 'eco_bas_tecompromiso'
+        verbose_name_plural = 'tipo de estados de los compromisos de la reunión'
+
+    def __str__(self):
+        return str(self.id_tecompromiso)  
+
+
+# MODELOS DE TABLAS DINÁMICAS DE REUNIONES
+
 class TemaReunion(models.Model):
     id_temareunion = models.AutoField(primary_key=True)
     nombre_temareunion = models.CharField(max_length=100)
@@ -29,20 +58,6 @@ class FechaReunion(models.Model):
 
     def __str__(self):
         return str(self.id_fechareunion)
-    
-
-class SedeUnp(models.Model):
-    id_sede = models.AutoField(primary_key=True)
-    nombre_sede = models.CharField(max_length=100, blank=True, null=True)
-    departamento = models.ForeignKey(sis_models.Departamento, to_field='id_departamento', on_delete=models.CASCADE, blank=True, null=True)
-    Municipio = models.ForeignKey(sis_models.Municipio, to_field='id_municipio', on_delete=models.CASCADE, blank=True, null=True)
-    
-    class Meta:
-        db_table = 'eco_reu_sede'
-        verbose_name_plural = 'Sedes de la UNP'
-
-    def __str__(self):
-        return str(self.id_sede)
     
 class LugarReunion(models.Model):
     id_lugarreunion = models.AutoField(primary_key=True)
@@ -221,17 +236,6 @@ class FechaCompromiso(models.Model):
 
     def __str__(self):
         return str(self.id_fechacompromiso)
-    
-class TipoEstadoCompromiso(models.Model):
-    id_tecompromiso = models.AutoField(primary_key=True)
-    nombre_tecompromiso = models.CharField(max_length=50, blank=True, null=True)
-
-    class Meta:
-        db_table = 'eco_reu_tecompromiso'
-        verbose_name_plural = 'tipo de estados de los compromisos de la reunión'
-
-    def __str__(self):
-        return str(self.id_tecompromiso)
     
 class EstadoCompromiso(models.Model):
     id_estadocompromiso = models.AutoField(primary_key=True)
