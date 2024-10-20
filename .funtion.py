@@ -26,5 +26,5 @@ def decrypt_message(encrypted_message):
 
 # Usar las funciones
 # generate_key()  
-encrypted_db_password = encrypt_message("---")
+encrypted_db_password = encrypt_message("localhost")
 print(encrypted_db_password)

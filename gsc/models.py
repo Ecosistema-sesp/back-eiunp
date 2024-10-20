@@ -3,10 +3,9 @@ from django.contrib.contenttypes.fields import  GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from sistema import models as sis_models
 
-# Create your models here.
 
 # MODELOS DE SERVICIO AL CIUDADAO ESTÁTICOS
-
+#1
 class TipoDiscapacidad(models.Model):
     id_tdiscapacidad = models.SmallAutoField(primary_key=True)
     nombre_tdiscapacidad = models.CharField(max_length=30)
@@ -18,6 +17,7 @@ class TipoDiscapacidad(models.Model):
     def __str__(self):
         return str(self.nombre_tdiscapacidad)
 
+#2
 class TipoGrupoEtnico(models.Model):
     id_tetnico = models.SmallAutoField(primary_key=True)
     nombre_tetnico = models.CharField(max_length=30)
@@ -29,6 +29,7 @@ class TipoGrupoEtnico(models.Model):
     def __str__(self):
         return str(self.nombre_tetnico)
 
+#3
 class TipoOrganizacionPersona(models.Model):
     id_torganizacion = models.SmallAutoField(primary_key=True)
     nombre_torganizacion = models.CharField(max_length=30)
@@ -40,6 +41,7 @@ class TipoOrganizacionPersona(models.Model):
     def __str__(self):
         return str(self.nombre_torganizacion)
 
+#4
 class TipoMedidaCautelar(models.Model):
     id_tmcautelar = models.SmallAutoField(primary_key=True)
     nombre_tmcautelar = models.CharField(max_length=150)
@@ -51,6 +53,7 @@ class TipoMedidaCautelar(models.Model):
     def __str__(self):
         return str(self.nombre_tmcautelar)
 
+#5
 class TipoSituacionesRiesgo(models.Model):
     id_tiporiesgo = models.AutoField(primary_key=True)
     nombre_sriesgo = models.CharField(max_length=50, null=True, blank=True)
@@ -61,6 +64,7 @@ class TipoSituacionesRiesgo(models.Model):
     def __str__(self):
         return str(self.nombre_sriesgo)
 
+#6
 class TipoMediosSituacion(models.Model):
     id_msituacion = models.AutoField(primary_key=True)
     nombre_msituacion = models.CharField(max_length=50, null=True, blank=True)
@@ -71,7 +75,8 @@ class TipoMediosSituacion(models.Model):
 
     def __str__(self):
         return str(self.nombre_msituacion)
-    
+   
+#7 
 class TipoPoblacion(models.Model):
     id_tipopoblacion = models.AutoField(primary_key=True)
     nombre_tpoblacion = models.CharField(max_length=170, null=True, blank=True)
@@ -83,6 +88,7 @@ class TipoPoblacion(models.Model):
     def __str__(self):
         return str(self.id_tipopoblacion)
     
+#8 
 class PoblacionObjeto(models.Model):
     id_poblacionobjeto = models.AutoField(primary_key=True)
     nombre_pobjeto = models.CharField(max_length=700, null=True, blank=True)
@@ -97,6 +103,7 @@ class PoblacionObjeto(models.Model):
     def __str__(self):
         return str(self.id_poblacionobjeto)
 
+#9
 class TipoCategoriaOrganizacion(models.Model):
     id_catorganizacion = models.AutoField(primary_key=True)
     nombre_catorganizacion = models.CharField(max_length=200, null=True, blank=True)
@@ -108,6 +115,7 @@ class TipoCategoriaOrganizacion(models.Model):
     def __str__(self):
         return str(self.id_catorganizacion)
 
+#10
 class CategoriaPnis(models.Model):
     id_categoriapnis = models.AutoField(primary_key=True)
     nombre_categoriapnis = models.CharField(max_length=200, null=True, blank=True)
@@ -117,6 +125,7 @@ class CategoriaPnis(models.Model):
     def __str__(self):
         return str(self.id_categoriapnis)
 
+#11
 class tipoEntidadAcreditadora(models.Model):
     id_teacreditadora = models.AutoField(primary_key=True)
     nombre_teacreditadora = models.CharField(max_length=40, null=True,blank=True)
@@ -128,6 +137,7 @@ class tipoEntidadAcreditadora(models.Model):
     def __str__(self):
         return str(self.id_teacreditadora)
     
+#12
 class PoblacionGeneralColectivo(models.Model):
     id_tpgcolectivo = models.SmallAutoField(primary_key=True)
     nombre_tpgcolectivo = models.CharField(max_length=700, null=True, blank=True)
@@ -139,6 +149,7 @@ class PoblacionGeneralColectivo(models.Model):
     def __str__(self):
         return str(self.id_tpgcolectivo)
 
+#13
 class TipoPoblacionColectivo(models.Model):
     id_tpcolectivo = models.SmallAutoField(primary_key=True)
     nombre_tpcolectivo = models.CharField(max_length=700, null=True, blank=True)
@@ -151,6 +162,8 @@ class TipoPoblacionColectivo(models.Model):
     def __str__(self):
         return str(self.id_tpcolectivo)
     
+    
+#14
 class TipoPoblacionSesp(models.Model):
     id_poblacionsesp = models.SmallAutoField(primary_key=True)
     nombre_poblacionsesp = models.CharField(max_length=150, null=True, blank=True)
@@ -165,8 +178,8 @@ class TipoPoblacionSesp(models.Model):
     
 
 
-# MODELOS PARA SERVICIO AL CIUDADANO DINÁMICOS
-
+# MODELO
+#15
 class DireccionNotificacionPersona(models.Model):
     id_notificacion = models.IntegerField(primary_key=True)
     ubicacion_notificacion = GenericRelation(sis_models.DatosUbicacion)
@@ -179,6 +192,7 @@ class DireccionNotificacionPersona(models.Model):
     def __str__(self):
         return str(self.ubicacion_notificacion)
     
+#16
 class NombreIdentitario(models.Model):
     id_identitario = models.AutoField(primary_key=True)
     nombre_identitario = models.CharField(max_length=60, null=True, blank=True)
@@ -191,6 +205,7 @@ class NombreIdentitario(models.Model):
     def __str__(self):
         return str(self.id_identitario)
     
+#17
 class PersonasCargo(models.Model):
     id_pcargo = models.SmallAutoField(primary_key=True)
     numero_pcargo= models.SmallIntegerField(null=True, blank=True)
@@ -203,6 +218,7 @@ class PersonasCargo(models.Model):
     def __str__(self):
         return str(self.id_pcargo)
     
+#18
 class DispacidadPersona(models.Model):
     id_dpersona = models.SmallAutoField(primary_key=True)
     tipo_discapacidad = models.ForeignKey(TipoDiscapacidad, to_field='id_tdiscapacidad',on_delete=models.CASCADE)
@@ -214,7 +230,8 @@ class DispacidadPersona(models.Model):
 
     def __str__(self):
         return str(self.id_dpersona)
-    
+  
+#19  
 class GrupoEtnicoPersona(models.Model):
     id_getnico = models.AutoField(primary_key=True)
     tipo_getnico = models.ForeignKey(TipoGrupoEtnico, to_field='id_tetnico', on_delete=models.CASCADE)
@@ -227,6 +244,7 @@ class GrupoEtnicoPersona(models.Model):
     def __str__(self):
         return str(self.id_getnico)
     
+#20
 class GrupoIndigena(models.Model):
     id_gindigena = models.AutoField(primary_key=True)
     etnia = models.CharField(max_length=100, null=True, blank=True)
@@ -242,6 +260,7 @@ class GrupoIndigena(models.Model):
     def __str__(self):
         return str(self.id_gindigena)
     
+#21
 class EtnicoIndigena(models.Model):
     id_etnicoindigena = models.AutoField(primary_key=True)
     grupo_etnico = models.ForeignKey(GrupoEtnicoPersona, to_field='id_getnico', on_delete=models.CASCADE)
@@ -254,6 +273,7 @@ class EtnicoIndigena(models.Model):
     def __str__(self):
         return str(self.id_etnicoindigena)
 
+#22
 class OtroGrupoPersona(models.Model):
     id_ogetnico = models.AutoField(primary_key=True)
     nombre_ccomunitario = models.CharField(max_length=100, null=True, blank=True)
@@ -264,7 +284,8 @@ class OtroGrupoPersona(models.Model):
 
     def __str__(self):
         return str(self.id_ogetnico)
-    
+
+#23  
 class EtnicoConcejo(models.Model):
     id_etnicoconcejo = models.AutoField(primary_key=True)
     grupo_etnico = models.ForeignKey(GrupoEtnicoPersona, to_field='id_getnico', on_delete=models.CASCADE)
@@ -277,6 +298,7 @@ class EtnicoConcejo(models.Model):
     def __str__(self):
         return str(self.id_etnicoconcejo)
     
+#24
 class Organizacion(models.Model):
     id_organizacion = models.SmallAutoField(primary_key=True)
     nombre_organizacion = models.CharField(max_length=100, null=True, blank=True)
@@ -290,6 +312,7 @@ class Organizacion(models.Model):
     def __str__(self):
         return str(self.id_organizacion)
 
+#25
 class OtraOrganizacion(models.Model):
     id_oorganizacion = models.SmallAutoField(primary_key=True)
     nombre_oorganizacion = models.CharField(max_length=100, null=True, blank=True)
@@ -302,6 +325,7 @@ class OtraOrganizacion(models.Model):
     def __str__(self):
         return str(self.id_oorganizacion)
 
+#26
 class PersoneriaJuridica(models.Model):
     id_pjuridica = models.SmallAutoField(primary_key=True)
     numero_pjuridica= models.CharField(max_length=20, blank=True, null=True)
@@ -314,6 +338,7 @@ class PersoneriaJuridica(models.Model):
     def __str__(self):
         return str(self.id_pjuridica)
     
+#27
 class OrganizacionPersona(models.Model):
     id_orgpersona = models.SmallAutoField(primary_key=True)
     cpersona = models.ForeignKey(sis_models.DatosComplemetariosPersona, to_field='id_complementarios', on_delete=models.CASCADE)
@@ -326,6 +351,7 @@ class OrganizacionPersona(models.Model):
     def __str__(self):
         return str(self.id_orgpersona)
         
+#28
 class MedidaCuatelarPersona(models.Model):
     id_mcautelar = models.AutoField(primary_key=True)
     tipo_mcautelar = models.ForeignKey(TipoMedidaCautelar, to_field='id_tmcautelar', on_delete=models.CASCADE)
@@ -338,6 +364,7 @@ class MedidaCuatelarPersona(models.Model):
     def __str__(self):
         return str(self.id_mcautelar)
     
+#29
 class ActividadAmbientalPersona(models.Model):
     id_actividadambiental = models.AutoField(primary_key=True)
     desarrolla_aambiental = models.BooleanField(default=False)
@@ -349,7 +376,8 @@ class ActividadAmbientalPersona(models.Model):
 
     def __str__(self):
         return str(self.id_actividadambiental)
-    
+  
+#30  
 class IdRiesgo(models.Model):
     id_iriesgo = models.AutoField(primary_key=True)
     persona = models.ForeignKey(sis_models.DatosBasicosPersona, to_field='id_persona', on_delete=models.CASCADE)
@@ -360,7 +388,8 @@ class IdRiesgo(models.Model):
 
     def __str__(self):
         return str(self.id_iriesgo)
-    
+ 
+#31   
 class Evidencias(models.Model):
     id_evidencias = models.AutoField(primary_key=True)
     ruta_evidencias = models.FileField(upload_to='evidencias/', null=False, blank=False)
@@ -372,7 +401,8 @@ class Evidencias(models.Model):
         
     def __str__(self):
         return str(self.id_evidencias)
-    
+   
+#32 
 class IdentificacionSituacion(models.Model):
     id_identificacionSituacion = models.AutoField(primary_key=True)
     identificacion_riesgo = models.ForeignKey(IdRiesgo, to_field='id_iriesgo', on_delete=models.CASCADE)
@@ -385,6 +415,7 @@ class IdentificacionSituacion(models.Model):
     def __str__(self):
         return str(self.id_identificacionSituacion)
     
+#33
 class OtraSituacionRiesgo(models.Model):
     id_osriesgo = models.AutoField(primary_key=True)
     nombre_osituacion = models.CharField(max_length=50, null=True, blank=True)
@@ -396,6 +427,7 @@ class OtraSituacionRiesgo(models.Model):
     def __str__(self):
         return str(self.id_osriesgo)
     
+#34
 class IdentificacionMedio(models.Model):
     id_identificacionmedio = models.AutoField(primary_key=True)
     identificacion_riesgo = models.ForeignKey(IdRiesgo, to_field='id_iriesgo', on_delete=models.CASCADE)
@@ -407,7 +439,8 @@ class IdentificacionMedio(models.Model):
 
     def __str__(self):
         return str(self.id_identificacionmedio)
-    
+ 
+#35   
 class RelatosHechos(models.Model):
     id_rhechos = models.AutoField(primary_key=True)
     relato_hechos = models.CharField(max_length=5000, null=False, blank=False)
@@ -420,6 +453,7 @@ class RelatosHechos(models.Model):
     def __str__(self):
         return str(self.id_rhechos)
     
+#36
 class IdPoblacion(models.Model):
     id_ipoblacion = models.AutoField(primary_key=True)
     persona = models.ForeignKey(sis_models.DatosBasicosPersona, to_field='id_persona', on_delete=models.CASCADE)
@@ -430,7 +464,8 @@ class IdPoblacion(models.Model):
 
     def __str__(self):
         return str(self.id_ipoblacion)
-    
+   
+#37 
 class IdentificacionPoblacionObjeto(models.Model):
     id_ipobjeto = models.AutoField(primary_key=True)
     identificacion_poblacion = models.ForeignKey(IdPoblacion, to_field='id_ipoblacion', on_delete=models.CASCADE)
@@ -443,6 +478,7 @@ class IdentificacionPoblacionObjeto(models.Model):
     def __str__(self):
         return str(self.id_ipobjeto)
     
+#28
 class FilePoblacion(models.Model):
     id_fpoblacion = models.AutoField(primary_key=True)
     ruta_fpoblacion = models.FileField(upload_to='poblacion_objeto/', null=False, blank=False)
@@ -455,6 +491,7 @@ class FilePoblacion(models.Model):
     def __str__(self):
         return str(self.id_fpoblacion)
     
+#29
 class OrganizacionPolitica(models.Model):
     id_porganizacion = models.AutoField(primary_key=True)
     pertene_poprganizacion = models.BooleanField(default=False)
@@ -466,6 +503,7 @@ class OrganizacionPolitica(models.Model):
     def __str__(self):
         return str(self.id_porganizacion)
     
+#40
 class CargoOrganizacion(models.Model):
     id_corganizacion = models.AutoField(primary_key=True)
     nombre_corganizacion = models.CharField(max_length=200, null=True, blank=True)
@@ -477,6 +515,7 @@ class CargoOrganizacion(models.Model):
     def __str__(self):
         return str(self.id_corganizacion)
 
+#41
 class DatosPnis(models.Model):
     id_pnis = models.AutoField(primary_key=True)
     pertenece_pnis = models.BooleanField(default=False)
@@ -487,7 +526,8 @@ class DatosPnis(models.Model):
         verbose_name_plural = 'Datos del PNIS'
     def __str__(self):
         return str(self.id_pnis)
-    
+  
+#42  
 class Consentimiento(models.Model):
     id_consentimiento = models.AutoField(primary_key=True)
     acepta_tdpersonales = models.BooleanField(null=False)
@@ -502,6 +542,7 @@ class Consentimiento(models.Model):
     def __str__(self):
         return str(self.id_consentimiento)
     
+#43
 class funcionColectivo(models.Model):
     id_fcolectivo = models.AutoField(primary_key=True)
     organizacion_stnivel = models.CharField(max_length=300, blank=True, null=True)
@@ -515,6 +556,7 @@ class funcionColectivo(models.Model):
     def __str__(self):
         return str(self.id_fcolectivo)
 
+#44
 class EntidadAcreditadora(models.Model):
     id_eacreditadora = models.AutoField(primary_key=True)
     Tipo_eacreditadora = models.ForeignKey(tipoEntidadAcreditadora, to_field='id_teacreditadora', on_delete=models.CASCADE, blank=True, null=True)
@@ -527,10 +569,11 @@ class EntidadAcreditadora(models.Model):
     def __str__(self):
         return str(self.id_eacreditadora)
     
+#45
 class CantidadPersonasDiscapacidad(models.Model):
     id_cpdiscapacidad = models.AutoField(primary_key=True)
     cantidad_pdiscapacidad = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cpdiscapacidad'
@@ -539,10 +582,11 @@ class CantidadPersonasDiscapacidad(models.Model):
     def __str__(self):
         return str(self.id_cpdiscapacidad)
     
+#46
 class CantidadPersonasIndigena(models.Model):
     id_cpindigena = models.AutoField(primary_key=True)
     cantidad_pindigena = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cpindigena'
@@ -550,11 +594,12 @@ class CantidadPersonasIndigena(models.Model):
         
     def __str__(self):
         return str(self.id_cpindigena)
-    
+ 
+#47   
 class cantidadPersonasAfrocolombianos(models.Model):
     id_cpafrocolombiano = models.AutoField(primary_key=True)
     cantidad_pafrocolombiano = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cpafrocolombiano'
@@ -563,10 +608,11 @@ class cantidadPersonasAfrocolombianos(models.Model):
     def __str__(self):
         return str(self.id_cpafrocolombiano)
     
+#48
 class cantidadPersonasNegro(models.Model):
     id_cpnegro = models.AutoField(primary_key=True)
     cantidad_pnegro = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cpnegro'
@@ -575,10 +621,11 @@ class cantidadPersonasNegro(models.Model):
     def __str__(self):
         return str(self.id_cpnegro)
     
+#49
 class cantidadPersonasRaizal(models.Model):
     id_cpraizal = models.AutoField(primary_key=True)
     cantidad_praizal = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cpraizal'
@@ -587,10 +634,11 @@ class cantidadPersonasRaizal(models.Model):
     def __str__(self):
         return str(self.id_cpraizal)
 
+#50
 class cantidadPersonasPalenquero(models.Model):
     id_cppalenquero = models.AutoField(primary_key=True)
     cantidad_ppalenquero = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cppalenquero'
@@ -599,10 +647,11 @@ class cantidadPersonasPalenquero(models.Model):
     def __str__(self):
         return str(self.id_cppalenquero)
     
+#51
 class cantidadPersonasRomGitano(models.Model):
     id_cpromgitano = models.AutoField(primary_key=True)
     cantidad_promgitano = models.SmallIntegerField(default=0, null=True, blank=True)
-    informacion_cfdiferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    informacion_cfdiferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'eco_gsc_cpromgitano'
@@ -611,6 +660,7 @@ class cantidadPersonasRomGitano(models.Model):
     def __str__(self):
         return str(self.id_cpromgitano)
     
+#52
 class CorrespondenciaColectivo(models.Model):
     id_ccolectivo = models.AutoField(primary_key=True)
     ubicacion_ccolectivo = GenericRelation(sis_models.DatosUbicacion)
@@ -622,6 +672,7 @@ class CorrespondenciaColectivo(models.Model):
     def __str__(self):
         return str(self.id_ccolectivo)
     
+#53
 class MedidaCautelarColectivo(models.Model):
     id_mccolectivo = models.AutoField(primary_key=True)
     es_bmcocomisionidhumanos = models.BooleanField(default=False, null=True, blank=True)
@@ -637,6 +688,7 @@ class MedidaCautelarColectivo(models.Model):
     def __str__(self):
         return str(self.id_mccolectivo)
     
+#54
 class mcComisionInternacional(models.Model):
     id_mccomision = models.AutoField(primary_key=True)
     numero_medida = models.CharField(max_length=20, blank=True, null=True)
@@ -649,6 +701,7 @@ class mcComisionInternacional(models.Model):
     def __str__(self):
         return str(self.id_mccomision)
     
+#55
 class mcCorteInternacional(models.Model):
     id_mccorte = models.AutoField(primary_key=True)
     numero_medida = models.CharField(max_length=20, blank=True, null=True)
@@ -661,6 +714,7 @@ class mcCorteInternacional(models.Model):
     def __str__(self):
         return str(self.id_mccorte)
     
+#56
 class mcJuezRepublica(models.Model):
     id_mcjrepublica = models.AutoField(primary_key=True)
     numero_medida = models.CharField(max_length=20, blank=True, null=True)
@@ -673,6 +727,7 @@ class mcJuezRepublica(models.Model):
     def __str__(self):
         return str(self.id_mcjrepublica)
     
+#57
 class EntidadSolicitanteColectivo(models.Model):
     id_esolicitante = models.AutoField(primary_key=True)
     nombre_esolicitante = models.CharField(max_length=100, blank=True, null=True)
@@ -685,6 +740,7 @@ class EntidadSolicitanteColectivo(models.Model):
     def __str__(self):
         return str(self.id_esolicitante)
     
+#58
 class ActividadPersonaColectivo(models.Model):
     id_apcolectivo = models.AutoField(primary_key=True)
     descripcion_actividad = models.CharField(max_length=300, null=True, blank=True)
@@ -697,6 +753,7 @@ class ActividadPersonaColectivo(models.Model):
     def __str__(self):
         return str(self.id_apcolectivo)
 
+#59
 class IdPoblacionColectivo(models.Model):
     id_ipcolectivo = models.AutoField(primary_key=True)
     colectivo = models.ForeignKey(sis_models.DatosbasicosColectivos, to_field='id_bcolectivos', on_delete=models.CASCADE)
@@ -707,7 +764,8 @@ class IdPoblacionColectivo(models.Model):
 
     def __str__(self):
         return str(self.id_ipcolectivo)
-    
+ 
+#60   
 class PoblacionColectivo(models.Model):
     id_pcoelctivo = models.AutoField(primary_key=True)
     tipo_pcolectivo = models.ForeignKey(TipoPoblacionColectivo, to_field='id_tpcolectivo', on_delete=models.CASCADE)
@@ -720,6 +778,7 @@ class PoblacionColectivo(models.Model):
     def __str__(self):
         return str(self.id_pcoelctivo)
 
+#61
 class PoblacionColectivoSesp(models.Model):
     id_pcsesp = models.AutoField(primary_key=True)
     poblacion_sesp = models.ForeignKey(TipoPoblacionSesp, to_field='id_poblacionsesp', on_delete=models.CASCADE)
@@ -732,6 +791,7 @@ class PoblacionColectivoSesp(models.Model):
     def __str__(self):
         return str(self.id_pcsesp)
     
+#62
 class ActividadesColectivo(models.Model):
     id_acolectivo = models.AutoField(primary_key=True)
     descripcion_actividad = models.CharField(max_length=2000, blank=True, null=True)
@@ -743,7 +803,8 @@ class ActividadesColectivo(models.Model):
 
     def __str__(self):
         return str(self.id_acolectivo)
-    
+ 
+#63   
 class HechoVictimizanteColectivo(models.Model):
     id_hvcolectivo = models.AutoField(primary_key=True)
     descripcion_hvcolectivo = models.CharField(max_length=5000, null=True, blank=True)
@@ -756,6 +817,7 @@ class HechoVictimizanteColectivo(models.Model):
     def __str__(self):
         return str(self.id_hvcolectivo)
 
+#64
 class ConsentimientoColectivo(models.Model):
     id_cocolectivo = models.AutoField(primary_key=True)
     acepta_tdpersonales = models.BooleanField(null=False)

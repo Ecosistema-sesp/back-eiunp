@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 # MODELOS DE TABLAS ESTÁTICAS DE REUNIONES
 
+#1
 class SedeUnp(models.Model):
     id_sede = models.AutoField(primary_key=True)
     nombre_sede = models.CharField(max_length=100, blank=True, null=True)
@@ -21,6 +22,7 @@ class SedeUnp(models.Model):
     def __str__(self):
         return str(self.id_sede)
 
+#2
 class TipoEstadoCompromiso(models.Model):
     id_tecompromiso = models.AutoField(primary_key=True)
     nombre_tecompromiso = models.CharField(max_length=50, blank=True, null=True)
@@ -35,6 +37,7 @@ class TipoEstadoCompromiso(models.Model):
 
 # MODELOS DE TABLAS DINÁMICAS DE REUNIONES
 
+#3
 class TemaReunion(models.Model):
     id_temareunion = models.AutoField(primary_key=True)
     nombre_temareunion = models.CharField(max_length=100)
@@ -45,7 +48,8 @@ class TemaReunion(models.Model):
 
     def __str__(self):
         return str(self.id_tema)
-    
+ 
+#4   
 class FechaReunion(models.Model):
     id_fechareunion = models.AutoField(primary_key=True)
     fecha_reunion = models.DateField(null=True, blank=True)
@@ -58,7 +62,8 @@ class FechaReunion(models.Model):
 
     def __str__(self):
         return str(self.id_fechareunion)
-    
+
+#5    
 class LugarReunion(models.Model):
     id_lugarreunion = models.AutoField(primary_key=True)
     sede = models.ForeignKey(SedeUnp, to_field='id_sede', on_delete=models.CASCADE, blank=True, null=True)
@@ -71,6 +76,7 @@ class LugarReunion(models.Model):
     def __str__(self):
         return str(self.id_sede)
     
+#6
 class Reuniones(models.Model):
     id_reunion = models.AutoField(primary_key=True)
     fecha = models.ForeignKey(FechaReunion, to_field='id_fechareunion', on_delete=models.CASCADE, blank=True, null=True)
@@ -84,6 +90,7 @@ class Reuniones(models.Model):
     def __str__(self):
         return str(self.id_reunion)
     
+#7   
 class LlaveDesarrolloReunion(models.Model):
     id_tdreunion = models.AutoField(primary_key=True)
     reunion = models.ForeignKey(Reuniones, to_field='id_reunion', on_delete=models.CASCADE, blank=True, null=True)
@@ -94,7 +101,8 @@ class LlaveDesarrolloReunion(models.Model):
 
     def __str__(self):
         return str(self.id_tdreunion)
-    
+
+#8    
 class DesarrolloReunion(models.Model):
     id_dreunion = models.AutoField(primary_key=True)
     descripcion_tema = models.CharField(max_length=200, blank=True, null=True)
@@ -106,7 +114,8 @@ class DesarrolloReunion(models.Model):
 
     def __str__(self):
         return str(self.id_dreunion)
-    
+  
+#9  
 class LlaveConclusionReunion(models.Model):
     id_tcreunion = models.AutoField(primary_key=True)
     reunion = models.ForeignKey(Reuniones, to_field='id_reunion', on_delete=models.CASCADE, blank=True, null=True)
@@ -117,7 +126,8 @@ class LlaveConclusionReunion(models.Model):
 
     def __str__(self):
         return str(self.id_tcreunion)
-    
+ 
+#10   
 class ConclusionReunion(models.Model):
     id_creunion = models.AutoField(primary_key=True)
     descripcion_conclucion = models.CharField(max_length=200, blank=True, null=True)
@@ -129,7 +139,8 @@ class ConclusionReunion(models.Model):
 
     def __str__(self):
         return str(self.id_creunion)
-    
+
+#11    
 class LlaveAsistenteReunion(models.Model):
     id_lareunion = models.AutoField(primary_key=True)
     reunion = models.ForeignKey(Reuniones, to_field='id_reunion', on_delete=models.CASCADE, blank=True, null=True)
@@ -141,6 +152,7 @@ class LlaveAsistenteReunion(models.Model):
     def __str__(self):
         return str(self.id_lareunion)
 
+#12
 class AsistenteReunion(models.Model):
     id_areunion = models.AutoField(primary_key=True)
     usuario = models.ForeignKey(User, to_field='id', on_delete=models.CASCADE, blank=True, null=True)
@@ -152,7 +164,8 @@ class AsistenteReunion(models.Model):
 
     def __str__(self):
         return str(self.id_areunion)
-    
+ 
+#13   
 class LlaveResponsableReunion(models.Model):
     id_lrreunion = models.AutoField(primary_key=True)
     reunion = models.ForeignKey(Reuniones, to_field='id_reunion', on_delete=models.CASCADE, blank=True, null=True)
@@ -164,6 +177,7 @@ class LlaveResponsableReunion(models.Model):
     def __str__(self):
         return str(self.id_lrreunion)
 
+#14
 class ResponsableReunion(models.Model):
     id_responsablereunion = models.AutoField(primary_key=True)
     usuario = models.ForeignKey(User, to_field='id', on_delete=models.CASCADE, blank=True, null=True)
@@ -176,6 +190,7 @@ class ResponsableReunion(models.Model):
     def __str__(self):
         return str(self.id_responsablereunion)
 
+#15
 class RelatorReunion(models.Model):
     id_relatorreunion = models.AutoField(primary_key=True)
     usuario = models.ForeignKey(User, to_field='id', on_delete=models.CASCADE, blank=True, null=True)
@@ -188,6 +203,7 @@ class RelatorReunion(models.Model):
     def __str__(self):
         return str(self.id_relatorreunion)
 
+#16
 class LlaveCompromisoReunion(models.Model):
     id_lrcompromiso = models.AutoField(primary_key=True)
     reunion = models.ForeignKey(Reuniones, to_field='id_reunion', on_delete=models.CASCADE, blank=True, null=True)
@@ -199,6 +215,7 @@ class LlaveCompromisoReunion(models.Model):
     def __str__(self):
         return str(self.id_lrcompromiso)
 
+#17
 class CompromisoReunion(models.Model):
     id_compromiso = models.AutoField(primary_key=True)
     descripcion_compromiso = models.CharField(max_length=500, blank=True, null=True)
@@ -211,7 +228,8 @@ class CompromisoReunion(models.Model):
 
     def __str__(self):
         return str(self.id_compromiso)
-    
+
+#18    
 class ResponsableCompromiso(models.Model):
     id_responsablecompromiso = models.AutoField(primary_key=True)
     usuario = models.ForeignKey(User, to_field='id', on_delete=models.CASCADE, blank=True, null=True)
@@ -223,7 +241,8 @@ class ResponsableCompromiso(models.Model):
 
     def __str__(self):
         return str(self.id_responsablecompromiso)
-    
+
+#19    
 class FechaCompromiso(models.Model):
     id_fechacompromiso = models.AutoField(primary_key=True)
     fecha_iniciocompromiso = models.DateField(blank=True, null=True)
@@ -236,7 +255,8 @@ class FechaCompromiso(models.Model):
 
     def __str__(self):
         return str(self.id_fechacompromiso)
-    
+ 
+#20   
 class EstadoCompromiso(models.Model):
     id_estadocompromiso = models.AutoField(primary_key=True)
     estado_compromiso = models.ForeignKey(TipoEstadoCompromiso, to_field='id_tecompromiso', on_delete=models.CASCADE, blank=True, null=True)

@@ -9,6 +9,7 @@ from gsc import models as gsc_models
 
 # MODELOS PARA LAS TABLAS ESTÁTICAS DE REGISTRO
 
+#1
 class EstadoGeneral(models.Model):
     id_egeneral = models.AutoField(primary_key=True)
     nombre_egeneral = models.CharField(max_length=100, null=True, blank=True)
@@ -20,6 +21,7 @@ class EstadoGeneral(models.Model):
     def __str__(self):
         return str(self.id_egeneral)
 
+#2
 class EstadoEspecifico(models.Model):
     id_eespecifico = models.AutoField(primary_key=True)
     nombre_eespecifico = models.CharField(max_length=100, null=True, blank=True)
@@ -32,7 +34,8 @@ class EstadoEspecifico(models.Model):
     def __str__(self):
         return str(self.id_eespecifico)
 
-class TipoRura(models.Model):
+#3
+class TipoRuta(models.Model):
     id_truta = models.AutoField(primary_key=True)
     nombre_truta = models.CharField(max_length=20, null=True, blank=True)
 
@@ -43,6 +46,7 @@ class TipoRura(models.Model):
     def __str__(self):
         return str(self.id_truta)
 
+#4
 class CanalSolicitud(models.Model):
     id_csolicitud = models.AutoField(primary_key=True)
     nombre_csolicitud = models.CharField(max_length=40, null=True, blank=True)
@@ -54,6 +58,7 @@ class CanalSolicitud(models.Model):
     def __str__(self):
         return str(self.id_csolicitud)
 
+#5
 class TipoResultadoLlamada(models.Model):
     id_trllamada = models.AutoField(primary_key=True)
     nombre_trllamada = models.CharField(max_length=30, null=True, blank=True)
@@ -68,12 +73,13 @@ class TipoResultadoLlamada(models.Model):
 
 # MODELOS PARA LAS TABLAS DINÁMICAS DE REGISTRO
 
+#6
 class Registro(models.Model):
     registro = models.AutoField(primary_key=True)
     estado =  models.ForeignKey(EstadoEspecifico, to_field='id_eespecifico', on_delete=models.CASCADE, null=True, blank=True)
     objects_id = models.ForeignKey(ContentType, on_delete=models.CASCADE, blank=True, null=True)
     content_type = models.PositiveIntegerField(blank=True, null=True)
-    ruta =  models.ForeignKey(TipoRura, to_field='id_truta', on_delete=models.CASCADE, null=True, blank=True)
+    ruta =  models.ForeignKey(TipoRuta, to_field='id_truta', on_delete=models.CASCADE, null=True, blank=True)
     canal =  models.ForeignKey(CanalSolicitud, to_field='id_csolicitud', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
@@ -83,6 +89,7 @@ class Registro(models.Model):
     def __str__(self):
         return str(self.registro)
 
+#7
 class FechaTerminos(models.Model):
     id_fterminos = models.AutoField(primary_key=True)
     fecha_actualizacion = models.DateField(null=True, blank=True)
@@ -96,6 +103,7 @@ class FechaTerminos(models.Model):
     def __str__(self):
         return str(self.id_fterminos)
 
+#8
 class TrazabilidadGeneral(models.Model):
     id_trazabilidad = models.AutoField(primary_key=True)
     registro = models.ForeignKey(Registro, to_field='registro', on_delete=models.CASCADE)
@@ -107,6 +115,7 @@ class TrazabilidadGeneral(models.Model):
     def __str__(self):
         return str(self.id_trazabilidad)
     
+#9
 class Trazabilidad(models.Model):
     id_traza = models.AutoField(primary_key=True)
     fecha_recibido = models.DateField(null=True, blank=True)
@@ -124,7 +133,7 @@ class Trazabilidad(models.Model):
 
 # registro con los formularios de solicitud individual
 
-
+#10
 class fechaDiligenciamientoFormulario(models.Model):
     id_fdformulario = models.AutoField(primary_key=True)
     fecha_dformulario = models.DateField(null=True, blank=True)
@@ -135,7 +144,8 @@ class fechaDiligenciamientoFormulario(models.Model):
 
     def __str__(self):
         return str(self.id_fdformulario)
-    
+
+#11   
 class lugarDiligenciamientoFormulario(models.Model):
     id_ldiligenciamiento = models.AutoField(primary_key=True)
     pais = models.ForeignKey(sis_models.Pais, to_field='id_pais', on_delete=models.CASCADE)
@@ -149,6 +159,8 @@ class lugarDiligenciamientoFormulario(models.Model):
     def __str__(self):
         return str(self.id_ldiligenciamiento)
 
+
+#12
 class DiligenciaFormulario(models.Model):
     id_dformulario = models.AutoField(primary_key=True)
     primer_ndiligencia = models.CharField(max_length=30, null=True, blank=True)
@@ -166,6 +178,7 @@ class DiligenciaFormulario(models.Model):
     def __str__(self):
         return str(self.id_dformulario)
     
+#13
 class Formulario(models.Model):
     id_formulario = models.AutoField(primary_key=True)
     fecha_diligenciamiento = models.ForeignKey(fechaDiligenciamientoFormulario, to_field='id_fdformulario', on_delete=models.CASCADE)
@@ -179,6 +192,7 @@ class Formulario(models.Model):
     def __str__(self):
         return str(self.id_formulario)
 
+#14
 class FormularioIndividual(Formulario):
     persona = models.ForeignKey(sis_models.DatosBasicosPersona, to_field='id_persona', on_delete=models.CASCADE)
     cpersona = models.ForeignKey(sis_models.DatosComplemetariosPersona, to_field='id_complementarios', on_delete=models.CASCADE)
@@ -193,9 +207,10 @@ class FormularioIndividual(Formulario):
     def __str__(self):
         return str(self.id_formulario)
     
+#15
 class FormularioColectivo(Formulario):
     colectivo = models.ForeignKey(sis_models.DatosbasicosColectivos, to_field='id_bcolectivos', on_delete=models.CASCADE)
-    factor_diferencial = models.ForeignKey(sis_models.InformaciónColectivoFactorDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
+    factor_diferencial = models.ForeignKey(sis_models.ColectivoFDiferencial, to_field='id_icfdiferencial', on_delete=models.CASCADE)
     medida_cautelar = models.ForeignKey(gsc_models.MedidaCautelarColectivo, to_field='id_mccolectivo', on_delete=models.CASCADE)
     id_representante = models.ForeignKey(sis_models.PersonaColectivo, to_field='id_pcolectivo', on_delete=models.CASCADE)
     poblacion_colectivo = models.ForeignKey(gsc_models.IdPoblacionColectivo, to_field='id_ipcolectivo', on_delete=models.CASCADE)
@@ -210,8 +225,12 @@ class FormularioColectivo(Formulario):
         return str(self.id_formulario)
     
 
+
+
 # registro con los datos de llamadas
 
+
+#16
 class RegistroLlamadas(models.Model):
     id_rllamadas = models.AutoField(primary_key=True)
     registro = models.ForeignKey(Registro, to_field='registro', on_delete=models.CASCADE)
@@ -228,6 +247,7 @@ class RegistroLlamadas(models.Model):
     def __str__(self):
         return str(self.id_rllamadas)
     
+#17
 class FechaHoraLlamada(models.Model):
     id_fechahora = models.AutoField(primary_key=True)
     fecha_inicio = models.DateField(null=True, blank=True)
@@ -241,6 +261,7 @@ class FechaHoraLlamada(models.Model):
     def __str__(self):  
         return str(self.id_fechahora)
     
+#18
 class MedioContactoLlamada(models.Model):
     id_mcllamada = models.AutoField(primary_key=True)
     celular_torigen = models.CharField(max_length=12, null=True, blank=True)    
@@ -254,6 +275,7 @@ class MedioContactoLlamada(models.Model):
     def __str__(self):  
         return str(self.id_mcllamada)
 
+#19
 class InformacionLlamada(models.Model):
     id_infollamada = models.AutoField(primary_key=True)
     numero_intentos = models.SmallIntegerField(blank=True, null=True)
@@ -268,6 +290,7 @@ class InformacionLlamada(models.Model):
     def __str__(self):  
         return str(self.id_infollamada)
     
+#20
 class TerceroRespondeLlamada(models.Model):
     id_terceroresponde = models.AutoField(primary_key=True)
     nombre_terceroresponde = models.CharField(max_length=60, null=True, blank=True)
@@ -281,6 +304,7 @@ class TerceroRespondeLlamada(models.Model):
     def __str__(self):  
         return str(self.id_terceroresponde)
 
+#21
 class EntidadrespondeLlamada(models.Model):
     id_entidadresponde = models.AutoField(primary_key=True)
     nombre_entidadresponde = models.CharField(max_length=60, null=True, blank=True)
@@ -294,6 +318,7 @@ class EntidadrespondeLlamada(models.Model):
     def __str__(self):  
         return str(self.id_entidadresponde)
     
+#22
 class UbicacionrespondeLlamada(models.Model):
     id_ubicacionresponde = models.AutoField(primary_key=True)
     pais = models.ForeignKey(sis_models.Pais, to_field='id_pais', on_delete=models.CASCADE, blank=True, null=True)
@@ -310,6 +335,7 @@ class UbicacionrespondeLlamada(models.Model):
     def __str__(self):  
         return str(self.id_ubicacionresponde)
     
+#23
 class RespondeUrbanaLlamada(models.Model):
     id_respondeurbana = models.CharField(primary_key=True)
     nombre_barrio = models.CharField(max_length=30,  blank=True, null=True)
@@ -322,6 +348,7 @@ class RespondeUrbanaLlamada(models.Model):
     def __str__(self):  
         return str(self.id_respondeurbana)
     
+#24
 class RespondeRuralLlamada(models.Model):
     id_responderural = models.CharField(primary_key=True)
     vereda = models.CharField(max_length=30,  blank=True, null=True)

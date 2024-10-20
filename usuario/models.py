@@ -7,6 +7,7 @@ from sistema import models as sis_models
 
 # MODELOS DE TABLAS ESTÁTICAS DE USUARIO
 
+#1
 class TipoVinculacion(models.Model):
     id_tvinculacion = models.AutoField(primary_key=True)
     nombre_tvinculacion = models.CharField(max_length=30, null=True, blank=True)
@@ -18,6 +19,7 @@ class TipoVinculacion(models.Model):
     def __str__(self):
         return str(self.id_busuario)
 
+#2
 class Dependencia(models.Model):
     id_dependencia = models.SmallAutoField(primary_key=True)
     nombre_dependencia = models.CharField(max_length=30)
@@ -29,6 +31,7 @@ class Dependencia(models.Model):
     def __str__(self):
         return str(self.nombre_dependencia)
     
+#3
 class Grupo(models.Model):
     id_grupo = models.SmallAutoField(primary_key=True)
     nombre_grupo = models.CharField(max_length=30)
@@ -40,6 +43,7 @@ class Grupo(models.Model):
     def __str__(self):
         return str(self.nombre_grupo)
 
+#4
 class Rol(models.Model):
     id_rol = models.SmallAutoField(primary_key=True)
     nombre_rol = models.CharField(max_length=30)
@@ -54,6 +58,7 @@ class Rol(models.Model):
 
 # MODELOS DE TABLAS DINÁMICAS DE USUARIOS
 
+#5
 class TelefonoCelularContactoUsuario(models.Model):
     id_ctelefono = models.SmallAutoField(primary_key=True)
     celular_uno = models.CharField(max_length=15, blank=True, null=True)
@@ -67,6 +72,7 @@ class TelefonoCelularContactoUsuario(models.Model):
     def __str__(self):
         return str(self.id_ctelefono)
 
+#6
 class CorreoElectronicoContactoUsuario(models.Model):
     id_ccelectronico = models.SmallAutoField(primary_key=True)
     correo_electronico = models.EmailField(max_length=100)
@@ -78,6 +84,7 @@ class CorreoElectronicoContactoUsuario(models.Model):
     def __str__(self):
         return str(self.id_ccelectronico)
 
+#7
 class DatosContactoUsuario(models.Model):
     id_contacto = models.SmallAutoField(primary_key=True)
     id_ctelefono = models.ForeignKey(TelefonoCelularContactoUsuario, to_field='id_ctelefono', on_delete=models.CASCADE)
@@ -94,6 +101,7 @@ class DatosContactoUsuario(models.Model):
 
 # datos de ubicación
 
+#8
 class DatosUbicacionUsuario(models.Model):
     id_ubicacion = models.AutoField(primary_key=True)
     pais = models.ForeignKey(sis_models.Pais, to_field='id_pais',on_delete=models.CASCADE)
@@ -112,6 +120,7 @@ class DatosUbicacionUsuario(models.Model):
     def __str__(self):
         return str(self.id_ubicacion)
 
+#9
 class UbicacionRural(DatosUbicacionUsuario):
     corregimiento = models.CharField(max_length=150, null=True, blank=True)
     centro_poblado = models.CharField(max_length=150, null=True, blank=True)
@@ -124,7 +133,8 @@ class UbicacionRural(DatosUbicacionUsuario):
         db_table = 'eco_usr_direccionrural'
         verbose_name_plural = 'Dirección rural'
 
-class direccionUrbana(DatosUbicacionUsuario):
+#10
+class UbicacionUrbana(DatosUbicacionUsuario):
     nombre_barrio = models.CharField(max_length=100, null=True, blank=True)
     tipo_viaprincipal = models.CharField(max_length=20, null=True, blank=True)
     numero_viaprincipal = models.IntegerField(null=True, blank=True)
@@ -151,6 +161,7 @@ class direccionUrbana(DatosUbicacionUsuario):
         verbose_name_plural = 'Dirección urbana'
 
 # datos básicos
+#11
 class IdentificacionUsuario(models.Model):
     id_iusuario = models.AutoField(primary_key=True)
     numero_identificacion = models.CharField(max_length=20, null=False, blank=True)
@@ -164,6 +175,7 @@ class IdentificacionUsuario(models.Model):
     def __str__(self):
         return str(self.numero_identificacion) + str(self.fecha_expedicion)
 
+#12
 class NombrePersonaUsuario(models.Model):
     id_npersona = models.AutoField(primary_key=True)
     primer_nombre = models.CharField(max_length=20, null=False, blank=False)
@@ -178,6 +190,7 @@ class NombrePersonaUsuario(models.Model):
     def __str__(self):
         return str(self.id_npersona) + str(self.primer_nombre)
 
+#13
 class DatosBasicosUsuario(models.Model):
     id_busuario = models.AutoField(primary_key=True)
     identificacion_usuario = models.ForeignKey(IdentificacionUsuario, to_field='id_iusuario', on_delete=models.CASCADE)
@@ -194,8 +207,9 @@ class DatosBasicosUsuario(models.Model):
     def __str__(self):
         return str(self.id_busuario)
     
-# datos complementarios
 
+# datos complementarios
+#14
 class DatosComplementariosUsuario(models.Model):
     id_cusuario = models.AutoField(primary_key=True)
     estado_civil = models.ForeignKey(sis_models.EstadoCivil, to_field='id_ecivil', on_delete=models.CASCADE, null=True)
@@ -210,7 +224,8 @@ class DatosComplementariosUsuario(models.Model):
 
     def __str__(self):
         return str(self.id_cusuario)
-    
+
+#15 
 class ContratoContratista(models.Model):
     id_contrato = models.AutoField(primary_key=True)
     numero_contrato = models.CharField(max_length=10, blank=True, null=True)
@@ -225,6 +240,7 @@ class ContratoContratista(models.Model):
     def __str__(self):
         return str(self.id_contrato)
     
+#16
 class ResolucionFuncionario(models.Model):
     id_resolucion = models.AutoField(primary_key=True)
     numero_resolucion = models.CharField(max_length=30, blank=True, null=True)
@@ -238,7 +254,7 @@ class ResolucionFuncionario(models.Model):
         return str(self.id_resolucion)
     
 # datos para definir el perfil de usuario
-
+#17
 class PerfilUsuario(models.Model):
     id_pusuario = models.AutoField(primary_key=True)
     dependencia = models.ForeignKey(Dependencia, to_field='id_dependencia', on_delete=models.CASCADE)

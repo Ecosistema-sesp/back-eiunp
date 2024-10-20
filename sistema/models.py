@@ -10,6 +10,7 @@ from django.contrib.gis.db import models as geo_models
 
 # MODELOS PARA LAS TABLAS ESTÁTICAS 
 
+#1
 class Pais(models.Model):
     id_pais = models.AutoField(primary_key=True)
     nombre_pais = models.CharField(max_length=170, null=False, blank=False)
@@ -21,7 +22,8 @@ class Pais(models.Model):
 
     def __str__(self):
         return str(self.id_pais)
-    
+
+#2  
 class Departamento(models.Model):
     id_departamento = models.IntegerField(primary_key=True)
     nombre_departamento = models.CharField(max_length=85, null=False, blank=False)
@@ -33,7 +35,8 @@ class Departamento(models.Model):
 
     def __str__(self):
         return str(self.id_departamento)
-    
+
+#3  
 class Municipio(models.Model):
     id_municipio = models.IntegerField(primary_key=True)
     nombre_municipio = models.CharField(max_length=85, null=False, blank=False)
@@ -45,7 +48,8 @@ class Municipio(models.Model):
 
     def __str__(self):
         return str(self.id_municipio)
-    
+
+#4   
 class ZonaUbicacion(models.Model):
     id_zubicacion = models.SmallAutoField(primary_key=True)
     nombre_zubicacion = models.CharField(max_length=10)
@@ -57,6 +61,7 @@ class ZonaUbicacion(models.Model):
     def __str__(self):
         return str(self.nombre_zubicacion)
 
+#5
 class TipoIdentificacion(models.Model):
     id_tidentificacion = models.SmallAutoField(primary_key=True)
     nombre_tidentificacion = models.CharField(max_length=30)
@@ -67,7 +72,8 @@ class TipoIdentificacion(models.Model):
 
     def __str__(self):
         return str(self.nombre_tidentificacion)
-    
+
+#6    
 class TipoGenero(models.Model):
     id_tgenero = models.SmallAutoField(primary_key=True)
     nombre_tgenero = models.CharField(max_length=30)
@@ -78,7 +84,8 @@ class TipoGenero(models.Model):
 
     def __str__(self):
         return str(self.nombre_tgenero)
-    
+
+#7   
 class EstadoCivil(models.Model):
     id_ecivil = models.SmallAutoField(primary_key=True)
     nombre_ecivil = models.CharField(max_length=30)
@@ -89,7 +96,8 @@ class EstadoCivil(models.Model):
 
     def __str__(self):
         return str(self.nombre_ecivil)
-    
+
+#8   
 class GpRh(models.Model):
     id_grh = models.SmallAutoField(primary_key=True)
     nombre_grh = models.CharField(max_length=30)
@@ -101,6 +109,7 @@ class GpRh(models.Model):
     def __str__(self):
         return str(self.nombre_grh)
 
+#9
 class FondoPensiones(models.Model):
     id_fpensiones = models.SmallAutoField(primary_key=True)
     nombre_fpensiones = models.CharField(max_length=30)
@@ -111,7 +120,8 @@ class FondoPensiones(models.Model):
 
     def __str__(self):
         return str(self.nombre_fpensiones)
-    
+
+#10   
 class Eps(models.Model):
     id_eps = models.SmallAutoField(primary_key=True)
     nombre_eps = models.CharField(max_length=30)
@@ -122,7 +132,8 @@ class Eps(models.Model):
 
     def __str__(self):
         return str(self.nombre_eps)
-    
+
+#11   
 class TipoSexo(models.Model):
     id_tsexo = models.SmallAutoField(primary_key=True)
     nombre_tsexo = models.CharField(max_length=30)
@@ -133,7 +144,8 @@ class TipoSexo(models.Model):
 
     def __str__(self):
         return str(self.nombre_tsexo)
-   
+
+#12   
 class TipoOrientacionSexual(models.Model):
     id_torientacion = models.SmallAutoField(primary_key=True)
     nombre_torientacion = models.CharField(max_length=30)
@@ -145,6 +157,7 @@ class TipoOrientacionSexual(models.Model):
     def __str__(self):
         return str(self.nombre_torientacion)
 
+#13
 class TipoRangoEtario(models.Model):
     id_tretario = models.SmallAutoField(primary_key=True)
     nombre_tretario = models.CharField(max_length=30)
@@ -155,7 +168,8 @@ class TipoRangoEtario(models.Model):
 
     def __str__(self):
         return str(self.nombre_tretario)
-    
+
+#14    
 class TipoFactorDiferencial(models.Model):
     id_tfdiferencial = models.SmallAutoField(primary_key=True)
     nombre_tfdiferencial = models.CharField(max_length=30)
@@ -167,6 +181,7 @@ class TipoFactorDiferencial(models.Model):
     def __str__(self):
         return str(self.nombre_tfdiferencial)
 
+#15
 class TipoIdentificacionColectivo(models.Model):
     id_ticolectivo = models.SmallAutoField(primary_key=True)
     nombre_ticolectivo = models.CharField(max_length=100)
@@ -179,9 +194,9 @@ class TipoIdentificacionColectivo(models.Model):
         return str(self.id_ticolectivo)
 
 
-
 # MODELOS PARA LAS TABLAS DINÁMICAS QUE SON TRASVERSALES A TODO EL SISTEMA
 
+#16
 class DatosUbicacion(models.Model):
     id_ubicacion = models.AutoField(primary_key=True)
     pais = models.ForeignKey(Pais, to_field='id_pais', on_delete=models.CASCADE)
@@ -200,6 +215,7 @@ class DatosUbicacion(models.Model):
     def __str__(self):
         return str(self.id_ubicacion)
 
+#17
 class UbicacionRural(DatosUbicacion):
     corregimiento = models.CharField(max_length=150, null=True, blank=True)
     centro_poblado = models.CharField(max_length=150, null=True, blank=True)
@@ -212,7 +228,8 @@ class UbicacionRural(DatosUbicacion):
         db_table = 'eco_sis_direccionrural'
         verbose_name_plural = 'Dirección rural'
 
-class direccionUrbana(DatosUbicacion):
+#18
+class UbicacionUrbana(DatosUbicacion):  ### se cambio el nombre
     nombre_barrio = models.CharField(max_length=100, null=True, blank=True)
     tipo_viaprincipal = models.CharField(max_length=20, null=True, blank=True)
     numero_viaprincipal = models.IntegerField(null=True, blank=True)
@@ -238,18 +255,20 @@ class direccionUrbana(DatosUbicacion):
         db_table = 'eco_sis_direccionurbana'
         verbose_name_plural = 'Dirección urbana'
 
-# class GeoUrbana(geo_models.Model):
-#     id_geourbana = geo_models.AutoField(primary_key=True)
-#     ubicacion = geo_models.ForeignKey(DatosUbicacion, to_field='id_ubicacion', on_delete=geo_models.CASCADE, blank=True, null=True)
-#     geom = geo_models.PointField(srid=4326, blank=True, null=True)
+#19
+class GeoUrbana(geo_models.Model):
+    id_geourbana = geo_models.AutoField(primary_key=True)
+    ubicacion = geo_models.ForeignKey(DatosUbicacion, to_field='id_ubicacion', on_delete=geo_models.CASCADE, blank=True, null=True)
+    geom = geo_models.PointField(srid=4326, blank=True, null=True)
 
-#     class Meta:
-#         db_table = 'eco_geo_urbana'
-#         verbose_name_plural = 'Geolocalización urbana'
+    class Meta:
+        db_table = 'eco_geo_urbana'
+        verbose_name_plural = 'Geolocalización urbana'
 
-#     def __str__(self):
-#         return str(self.id_geourbana)
+    def __str__(self):
+        return str(self.id_geourbana)
     
+#20
 class TelefonoCelularContacto(models.Model):
     id_ctelefono = models.SmallAutoField(primary_key=True)
     celular_uno = models.CharField(max_length=15, blank=True, null=True)
@@ -263,6 +282,7 @@ class TelefonoCelularContacto(models.Model):
     def __str__(self):
         return str(self.id_ctelefono)
     
+#21   
 class CorreoElectronicoContacto(models.Model):
     id_ccelectronico = models.SmallAutoField(primary_key=True)
     correo_electronico = models.EmailField(max_length=100)
@@ -275,6 +295,7 @@ class CorreoElectronicoContacto(models.Model):
     def __str__(self):
         return str(self.id_ccelectronico)
     
+#22
 class DatosContacto(models.Model):
     id_contacto = models.SmallAutoField(primary_key=True)
     id_ctelefono = models.ForeignKey(TelefonoCelularContacto, to_field='id_ctelefono', on_delete=models.CASCADE)
@@ -289,6 +310,7 @@ class DatosContacto(models.Model):
     def __str__(self):
         return str(self.id_contacto)
     
+#23
 class IdentificacionPersona(models.Model):
     id_ipersona = models.AutoField(primary_key=True)
     numero_identificacion = models.CharField(max_length=20, null=False, blank=True)
@@ -302,6 +324,7 @@ class IdentificacionPersona(models.Model):
     def __str__(self):
         return str(self.numero_identificacion) + str(self.fecha_expedicion)
 
+#24
 class FileDocumentoIdentidad(models.Model):
     id_fdocumento = models.AutoField(primary_key=True)
     file_documento = models.FileField(upload_to= 'documento_identidad/', null=True, blank=True)
@@ -312,6 +335,7 @@ class FileDocumentoIdentidad(models.Model):
     def __str__(self):
         return str(self.id_fdocumento)
 
+#25
 class NombrePersona(models.Model):
     id_npersona = models.AutoField(primary_key=True)
     primer_nombre = models.CharField(max_length=20, null=False, blank=False)
@@ -325,7 +349,8 @@ class NombrePersona(models.Model):
 
     def __str__(self):
         return str(self.id_npersona) + str(self.primer_nombre)
-    
+
+#26   
 class DatosBasicosPersona(models.Model):
     id_persona = models.AutoField(primary_key=True)
     nombre_persona = models.ForeignKey(NombrePersona, to_field='id_npersona', on_delete=models.CASCADE)
@@ -341,6 +366,7 @@ class DatosBasicosPersona(models.Model):
     def __str__(self):
         return str(self.id_persona)
 
+#27
 class LugarNacimientoPersona(models.Model):
     id_lnacimiento = models.AutoField(primary_key=True);
     pais = models.ForeignKey(Pais, to_field='id_pais', on_delete=models.CASCADE)
@@ -354,6 +380,7 @@ class LugarNacimientoPersona(models.Model):
     def __str__(self):
         return str(self.id_lnacimiento)
 
+#28
 class FechaNacimientoPersona(models.Model):
     id_fnacimiento = models.AutoField(primary_key=True)
     fecha_nacimiento = models.DateField(null=True, blank=True)
@@ -365,6 +392,7 @@ class FechaNacimientoPersona(models.Model):
     def __str__(self):
         return str(self.id_fnacimiento)
 
+#29
 class DatosNacimientoPersona(models.Model):
     id_dnacimiento = models.AutoField(primary_key=True)
     Lugar_npersona = models.ForeignKey(LugarNacimientoPersona, to_field='id_lnacimiento', on_delete=models.CASCADE, null=True, blank=True)
@@ -377,7 +405,8 @@ class DatosNacimientoPersona(models.Model):
 
     def __str__(self):
         return str(self.id_dnacimiento)
-    
+
+#30 
 class DatosComplemetariosPersona(models.Model):
     id_complementarios = models.SmallAutoField(primary_key=True)
     sexo = models.ForeignKey(TipoSexo, to_field='id_tsexo', on_delete=models.CASCADE)
@@ -397,7 +426,8 @@ class DatosComplemetariosPersona(models.Model):
 
     def __str__(self):
         return str(self.id_complementarios)
-    
+
+#31   
 class NombreRepresentanteLegalMenor(models.Model):
     id_nrepresentante = models.AutoField(primary_key=True)
     primer_nrepresentante = models.CharField(max_length=50, null=False, blank=False)
@@ -412,7 +442,8 @@ class NombreRepresentanteLegalMenor(models.Model):
     def __str__(self):
         return str(self.id_nrepresentante)
 
-class IdentificacionRepresentanteLegalMenor(models.Model):
+#32                                                  
+class IdentificacionRepresentante(models.Model):  ### se cambio el nombre
     id_irepresentante = models.AutoField(primary_key=True)
     numero_irepresentante = models.CharField(max_length=20, null=False, blank=True)
     fecha_exrepresentante = models.DateField()
@@ -424,11 +455,12 @@ class IdentificacionRepresentanteLegalMenor(models.Model):
 
     def __str__(self):
         return str(self.id_irepresentante)
-    
-class DatosRepresentanteLegalMenor(models.Model):
+
+#33
+class DatosRepresentanteLegal(models.Model): ### se cambio el nombre
     id_rrepresentante = models.AutoField(primary_key=True)
     nombre_rrepresentante = models.ForeignKey(NombreRepresentanteLegalMenor, to_field='id_nrepresentante', on_delete=models.CASCADE)
-    identificacion_rrepresentante = models.ForeignKey(IdentificacionRepresentanteLegalMenor, to_field='id_irepresentante', on_delete=models.CASCADE)
+    identificacion_rrepresentante = models.ForeignKey(IdentificacionRepresentante, to_field='id_irepresentante', on_delete=models.CASCADE)
     persona = models.ForeignKey(DatosBasicosPersona, to_field='id_persona', on_delete=models.CASCADE, null=True, blank=True)   
     contacto_rrepresentante = GenericRelation(DatosContacto)
 
@@ -437,13 +469,12 @@ class DatosRepresentanteLegalMenor(models.Model):
         verbose_name_plural = 'Datos del representante legal'
 
     def __str__(self):
-        return str(self.id_rrepresentante)
-    
+        return str(self.id_rrepresentante)    
 
+#34
 class NombreColectivo(models.Model):
     id_ncolectivo = models.AutoField(primary_key=True)
     nombre_colectivo = models.CharField(max_length=200, blank=True, null=True)
-    # registro = GenericRelation(Registro)
 
     class Meta:
         db_table = 'eco_sis_ncolectivo'
@@ -451,7 +482,8 @@ class NombreColectivo(models.Model):
 
     def __str__(self):
         return str(self.id_ncolectivo)
-        
+
+#35        
 class DatosbasicosColectivos(models.Model):
     id_bcolectivos = models.AutoField(primary_key=True)
     nombre_colectivo = models.ForeignKey(NombreColectivo, to_field='id_ncolectivo', on_delete=models.CASCADE)
@@ -465,6 +497,7 @@ class DatosbasicosColectivos(models.Model):
     def __str__(self):
         return str(self.id_bcolectivos)
     
+#36
 class IdentificacionColectivo(models.Model):
     id_icolectivo = models.AutoField(primary_key=True)
     tipo_icolectivo = models.ForeignKey(TipoIdentificacionColectivo, to_field='id_ticolectivo', on_delete=models.CASCADE)
@@ -478,7 +511,8 @@ class IdentificacionColectivo(models.Model):
     def __str__(self):
         return str(self.id_icolectivo)
 
-class InformaciónColectivoFactorDiferencial(models.Model):
+#37
+class ColectivoFDiferencial(models.Model):   ### se cambia el nombre
     id_icfdiferencial = models.AutoField(primary_key=True)
     tiene_pdiscapacidad = models.BooleanField(default=False, null=True, blank=True)
     tiene_pindigenas = models.BooleanField(default=False, null=True, blank=True)
@@ -496,6 +530,7 @@ class InformaciónColectivoFactorDiferencial(models.Model):
     def __str__(self):
         return str(self.id_icfdiferencial)
     
+#38
 class cantidadGenero(models.Model):
     id_cgenero = models.AutoField(primary_key=True)
     cantidad_femenino = models.SmallIntegerField(default=0, null=True, blank=True)
@@ -510,6 +545,7 @@ class cantidadGenero(models.Model):
     def __str__(self):
         return str(self.id_cgenero)
     
+#39
 class cantidadSexo(models.Model):
     id_csexo = models.AutoField(primary_key=True)
     cantidad_mujer = models.SmallIntegerField(default=0, null=True, blank=True)
@@ -524,6 +560,7 @@ class cantidadSexo(models.Model):
     def __str__(self):
         return str(self.id_csexo)
     
+#40
 class TotalIntegrantes(models.Model):
     id_tintegrantes = models.AutoField(primary_key=True)
     total_integrantes = models.SmallIntegerField(default=0, null=True, blank=True)
@@ -535,8 +572,9 @@ class TotalIntegrantes(models.Model):
         
     def __str__(self):
         return str(self.id_tintegrantes)
-    
-class NombreApellidoPersonaColectivo(models.Model):
+
+#41
+class NombrePersonaColectivo(models.Model): ### se cambio nombre
     id_napcolectivo = models.AutoField(primary_key=True)
     primer_npcolectivo = models.CharField(max_length=20, null=False, blank=False)
     segundo_npcolectivo = models.CharField(max_length=50, null=True, blank=True)
@@ -549,7 +587,8 @@ class NombreApellidoPersonaColectivo(models.Model):
 
     def __str__(self):
         return str(self.id_napcolectivo)
-    
+
+#42 
 class IdentificacionPersonaColectivo(models.Model):
     id_ipcolectivo = models.AutoField(primary_key=True)
     numero_ipcolectivo = models.CharField(max_length=20, null=False, blank=True)
@@ -562,10 +601,11 @@ class IdentificacionPersonaColectivo(models.Model):
 
     def __str__(self):
         return str(self.id_ipcolectivo) + str(self.numero_ipcolectivo)
-    
+
+#43  
 class PersonaColectivo(models.Model):
     id_pcolectivo = models.AutoField(primary_key=True)
-    nombre_pcolectivo = models.ForeignKey(NombreApellidoPersonaColectivo, to_field='id_napcolectivo', on_delete=models.CASCADE)
+    nombre_pcolectivo = models.ForeignKey(NombrePersonaColectivo, to_field='id_napcolectivo', on_delete=models.CASCADE)
     es_representante = models.BooleanField(default=False)
     esta_activo = models.BooleanField(default=True)
     colectivo = models.ForeignKey(DatosbasicosColectivos, to_field='id_bcolectivos', on_delete=models.CASCADE)
@@ -578,6 +618,7 @@ class PersonaColectivo(models.Model):
     def __str__(self):
         return str(self.id_pcolectivo)
 
+#44
 class PersonaColectivoRepresentante(PersonaColectivo):
     sexo_pcolectivo = models.ForeignKey(TipoSexo, to_field='id_tsexo', on_delete=models.CASCADE, null=True)
     ubicacion_pcolectivo = GenericRelation(DatosUbicacion)
