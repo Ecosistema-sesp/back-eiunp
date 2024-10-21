@@ -13,7 +13,7 @@ class SedeUnp(models.Model):
     id_sede = models.AutoField(primary_key=True)
     nombre_sede = models.CharField(max_length=100, blank=True, null=True)
     departamento = models.ForeignKey(sis_models.Departamento, to_field='id_departamento', on_delete=models.CASCADE, blank=True, null=True)
-    Municipio = models.ForeignKey(sis_models.Municipio, to_field='id_municipio', on_delete=models.CASCADE, blank=True, null=True)
+    municipio = models.ForeignKey(sis_models.Municipio, to_field='id_municipio', on_delete=models.CASCADE, blank=True, null=True)
     
     class Meta:
         db_table = 'eco_bas_sede'

@@ -7,4 +7,6 @@ urlpatterns = [
     path('reuniones/', include('reuniones.urls', namespace='reuniones')),
     path('sistema/', include('sistema.urls', namespace='sistema')),
     path('registro/', include('registro.urls', namespace='registro')),
+    path('gsc/', include('gsc.urls', namespace='gsc')),
+    
 ]

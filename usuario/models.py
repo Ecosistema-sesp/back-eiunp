@@ -22,7 +22,7 @@ class TipoVinculacion(models.Model):
 #2
 class Dependencia(models.Model):
     id_dependencia = models.SmallAutoField(primary_key=True)
-    nombre_dependencia = models.CharField(max_length=30)
+    nombre_dependencia = models.CharField(max_length=70)
 
     class Meta:
         db_table = 'eco_bas_dependencia'

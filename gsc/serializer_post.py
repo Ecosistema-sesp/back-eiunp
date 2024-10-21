@@ -35,9 +35,9 @@ class apiGrupoEtnicoPersona(serializers.ModelSerializer):
         fields = '__all__'
         
 #6 MGSC'20'
-class apiGrupoGrupoIndigena(serializers.ModelSerializer):
+class apiGrupoIndigena(serializers.ModelSerializer):
     class Meta:
-        model = gsc_models.GrupoGrupoIndigena
+        model = gsc_models.GrupoIndigena
         fields = '__all__'
         
 #7 MGSC'21'
